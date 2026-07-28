@@ -1,0 +1,256 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════
+   The Annotated Ledger — see DESIGN.md
+   The ledger is the inherited system. The annotation is Sean.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* metallic blue ramp — anchor #0B2D4F */
+  --blue-shadow: #071522;
+  --blue-deep:   #0B2D4F;
+  --blue-mid:    #14456F;
+  --blue-lit:    #1F6DA8;
+  --blue-spec:   #4FA3E3;
+  --blue-flake:  #A8D4F5;
+
+  /* brass — non-text in light, annotation in dark */
+  --brass:       #8A6A2F;
+  --brass-lit:   #C9A227;
+  --brass-spec:  #E3C35A;
+
+  /* light: warm paper, navy ink, oxblood annotation */
+  --ground:      #FBFAF7;
+  --ground-sunk: #F4F2EC;
+  --ink:         #16150F;
+  --muted:       #6E6A5C;
+  --rule:        #DDD8C9;
+  --rule-strong: #C6BFAB;
+  --link:        var(--blue-deep);
+  --link-hover:  var(--blue-lit);
+  --annot:       #9B2C1F;
+  --flake-opacity: 0;
+
+  --measure: 66ch;
+  --gutter: 11rem;
+}
+
+.dark {
+  --ground:      #0A141F;
+  --ground-sunk: #0E1B29;
+  --ink:         #E4E7EB;
+  --muted:       #8A96A4;
+  --rule:        #1E2C3C;
+  --rule-strong: #2C3E52;
+  --link:        var(--blue-spec);
+  --link-hover:  var(--blue-flake);
+  --annot:       var(--brass-spec);
+  --flake-opacity: 0.9;
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-ground-sunk: var(--ground-sunk);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-link: var(--link);
+  --color-annot: var(--annot);
+  --font-serif: var(--font-newsreader), Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+/* ── base ─────────────────────────────────────────────────── */
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 19px;
+  line-height: 1.65;
+  font-optical-sizing: auto;
+  transition: background 150ms linear, color 150ms linear;
+}
+
+/* the flake: sparse turbulence grain, dark mode only */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--flake-opacity);
+  transition: opacity 150ms linear;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.66  0 0 0 0 0.83  0 0 0 0 0.96  0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23f)' opacity='.055'/%3E%3C/svg%3E");
+}
+
+/* ── links: the one specular gesture ──────────────────────── */
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  background-image: linear-gradient(to right, currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: color 160ms ease-out, background-size 160ms ease-out,
+              border-color 160ms ease-out;
+}
+a:hover { color: var(--link-hover); background-size: 100% 1px; }
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── the ledger register ──────────────────────────────────── */
+
+.lbl {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* nav/brand variants — explicit classes beat fighting utility specificity */
+.lbl-ink { color: var(--ink); }
+.lbl-nav:hover { color: var(--link); }
+
+.status {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--annot);
+}
+
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* ── the annotation layer: structural, not decorative ─────── */
+
+.annot {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--annot);
+  font-size: 0.88rem;
+  font-style: italic;
+  line-height: 1.45;
+}
+.annot::before { content: "\2310 "; font-style: normal; opacity: 0.75; }
+
+/* inherited practice, struck and replaced */
+.revise s { color: var(--muted); text-decoration-thickness: 1px; opacity: 0.7; }
+.revise ins { color: var(--annot); text-decoration: none; font-style: italic; }
+
+/* ── the masthead rake: light → dark, spanning the glyphs ─── */
+
+.rake {
+  width: fit-content;
+  font-size: clamp(2.9rem, 8.5vw, 6rem);
+  line-height: 0.95;
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  background-image: linear-gradient(105deg,
+    var(--blue-lit) 0%, var(--blue-mid) 34%,
+    var(--blue-deep) 68%, var(--blue-shadow) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dark .rake {
+  background-image: linear-gradient(105deg,
+    #C9E4FA 0%, var(--blue-flake) 26%,
+    var(--blue-spec) 62%, #2E7FC0 100%);
+}
+
+/* ── prose ────────────────────────────────────────────────── */
+
+.prose { max-width: var(--measure); }
+.prose p { margin: 0 0 1.5rem; }
+.prose h2 {
+  font-size: 1.5rem; font-weight: 600;
+  margin: 3rem 0 1rem; letter-spacing: -0.012em;
+}
+.prose h3 {
+  font-size: 1.25rem; font-weight: 600;
+  margin: 2rem 0 0.75rem; letter-spacing: -0.012em;
+}
+.prose .lede { font-size: 1.16rem; line-height: 1.6; }
+.prose a { border-bottom: 1px solid var(--rule-strong); }
+.prose a:hover { border-bottom-color: transparent; }
+.prose ul, .prose ol { margin: 0 0 1.5rem 1.25rem; list-style: revert; }
+.prose li { margin-bottom: 0.4rem; }
+.prose blockquote {
+  border-left: 2px solid var(--annot);
+  padding-left: 1rem;
+  margin: 2rem 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.prose blockquote em { color: var(--annot); font-style: italic; }
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--ground-sunk);
+  border: 1px solid var(--rule);
+  padding: 0.1em 0.3em;
+  border-radius: 2px;
+}
+.prose pre {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  background: var(--ground-sunk);
+  border: 1px solid var(--rule);
+  padding: 1rem;
+  border-radius: 2px;
+  overflow-x: auto;
+  margin: 2rem 0;
+}
+.prose pre code { background: none; border: 0; padding: 0; }
+
+/* tabular figures, right-aligned to the rule */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.92rem;
+  display: block;
+  overflow-x: auto;
+}
+.prose th, .prose td {
+  border-bottom: 1px solid var(--rule);
+  padding: 0.55rem 0.5rem;
+  text-align: right;
+  white-space: nowrap;
+}
+.prose th:first-child, .prose td:first-child { text-align: left; white-space: normal; }
+.prose th {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+  border-bottom-color: var(--rule-strong);
+}
+.prose td:not(:first-child) {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

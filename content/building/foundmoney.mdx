@@ -1,0 +1,39 @@
+---
+title: "FoundMoney"
+date: "2026-07-01"
+status: "Active + adding"
+summary: "The most privacy-forward personal finance tool available. Shows you the spending you already have that could go toward something you want. Helps with intentional spending, if that's what you're going for. No judgment here."
+annotation: "unknown is a feature. A wrong category is worse than no category — it produces a confident recommendation about money that isn't there."
+---
+
+Not another budget app! Every tool in this space frames money as a yes/no judgment —
+can you afford this, did you overspend. FoundMoney asks a different question: what are
+you already spending that you'd rather spend on whatever else instead?
+
+The idea is "the money was already there, I just couldn't see it." Think of it as a
+discovery tool. I've approached categorization and recurring spend, nice-to-have,
+need-to-have in a novel way, and I read every bit of feedback to continuously improve!
+
+## Categorization is the hard part
+
+The hard part isn't the interface, it's categorization. Transaction descriptions from
+PDFs and images fight normalization — direct API is easy. Purchase info gets truncated
+or glued together, and every statement is slightly different across institutions.
+
+So classification runs as a confidence-gated ladder rather than one model: curated
+dictionary first, then personal-finance category at high confidence, then a keyword
+kit, then legacy rules, then low-confidence, then honestly `unknown`. Nothing gets a
+category it hasn't earned.
+
+Merchant grouping separates exact recurring charges from recurring merchants from
+occasional and one-time spend, because "you spend $44.81/month on coffee" and "you
+bought a couch once" are different facts and shouldn't be summed.
+
+## Categories are local. HYPER local, even.
+
+The first merchant pack is Hudson Valley, NY — because I live here, and it's great —
+since national dictionaries confidently mislabel the places people actually spend
+money. Local coffee shops. Chocolatier (just me?). Bakery (ok, a lot of food). Local
+summer camps.
+
+I feel really great about growing this out, and your input can help!

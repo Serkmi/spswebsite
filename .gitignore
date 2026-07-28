@@ -1,0 +1,58 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# ── PRIVATE: never commit. This repo is public. ────────────────────
+# Working notes, design reasoning, and voice guidance quote Sean's private
+# notes and personal reflections. They stay on disk, out of git.
+DESIGN.md
+VOICE.md
+*.odt
+.~lock.*#
+design-preview.html
+
+# design working files / reference images
+metallic*.png
+metallic*.jpg
+*palette*.png
+*color_palette*.png
+sparkly*.png
+
+# marginalia staging area — regenerate with scripts/wiki-inbox.mjs
+# (derived from private captures; annotations are unwritten)
+content/_inbox/
+
+# ── standard ───────────────────────────────────────────────────────
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+/build
+
+# misc
+.DS_Store
+*.pem
+.gstack/
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env*
+!.env.example
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

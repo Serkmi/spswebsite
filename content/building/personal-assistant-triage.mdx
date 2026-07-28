@@ -1,0 +1,56 @@
+---
+title: "Personal assistant triage"
+date: "2026-04-01"
+status: "Running nightly"
+summary: "I text myself constantly. Little to-do reminders, videos to watch later, a cool /skill to check out on GitHub, an X post, a random fun idea. This turns that stream into structured records without me sorting it."
+annotation: "Agent-assisted, not agent-decided. It classifies, defers, and drafts. It doesn't close things on my behalf."
+---
+
+I capture by texting myself — ideas, tasks, links, decisions, photos. It all goes into
+the same place, which is a lot of variety to ingest. The habit works because it's
+frictionless, but the pile was ever-growing. I needed a system.
+
+So the sorting is automated and the judgment stays mine. And I use deterministic rules.
+A LOT of rules, so it isn't AI reasoning its way through complex random bits constantly.
+
+## The loop
+
+Capture lands via Telegram at any hour — moving off plain self-texting was the one
+real change, and it's what made nightly backup possible. An hourly job imports it,
+applies any commands I left inline, and runs a conservative auto-triage. At 2:30am a
+batch of 150 goes through LLM triage, then a decay pass, then a research pass. At
+3:45am a separate run fetches any URLs, transcribes video, and summarizes. At 7:00am I
+get a morning brief.
+
+## Two lanes, and this is the load-bearing decision
+
+Content — links, videos, posts — is never a task. It routes to a wiki that transcribes
+and summarizes it, and comes back as a reading queue I choose from. Everything else is
+a commitment, and gets a stage.
+
+Conflating those two is why every read-it-later app becomes an "ohh, I meant to read
+that" pile.
+
+## Some of the rules
+
+Stages are `to_do_asap`, `decide`, `delegate`, `schedule`, `next_up`, `backlog`,
+`in_progress`, `insight`, `archive`, `done` — and `needs_review`.
+
+**`needs_review` is the one that matters.** Low-confidence classification doesn't get a
+guess; it gets surfaced in the morning brief for me to resolve. Same principle as
+`unknown` in FoundMoney.
+
+**Importance and urgency stay separate fields**, not one blended priority score.
+Blending them is how everything becomes urgent. It's not quite an Eisenhower Matrix,
+but that's the inspiration.
+
+**Action status is independent of item stage.** A thing can be fully triaged and still
+not started. Most systems collapse these and then can't tell the difference between "I
+haven't decided" and "I decided and haven't moved."
+
+**Things decay.** To-dos aged past 180 days get deferred or archived instead of sitting
+there. A list that never forgets is a list you stop reading.
+
+**Original text is preserved verbatim and never paraphrased.** Anything extracted from a
+photo is stored separately from what I actually wrote. Once you let the summary
+overwrite the source, you can't audit a bad classification later.
