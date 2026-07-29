@@ -52,6 +52,16 @@ npm run build    # production build, also typechecks
 npm run lint
 ```
 
+### Studio
+
+`npm run dev`, then **http://localhost:3000/studio** — a form-based editor for every
+entry, so there's no hand-editing of YAML frontmatter. It writes straight to the `.mdx`
+files in `content/`.
+
+It is development-only: the page and its API both return 404 when `NODE_ENV` is
+production, so it does not exist on the deployed site. Saving writes a file; it does
+not publish. Commit and push to do that.
+
 ## Design
 
 The site is typography-led: two families (Newsreader for prose, IBM Plex Mono for every
