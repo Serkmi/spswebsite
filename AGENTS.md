@@ -22,7 +22,13 @@ Two styles ship, selected by `data-style` on `<html>`:
   `--blue-deep` across the top 900px, then settles flat. Masked metal flake.
 
 `data-style` and the light/dark theme are **independent axes**. Never couple them.
-Never edit a frozen version doc — copy it to the next number.
+
+**Design artifacts are versioned, never overwritten.** Before changing any design
+doc or preview, archive the current version under a new name and edit the copy —
+version docs as `design/vN-*.md`, previews as `design/previews/YYYY-MM-DD-*.html`.
+These files are gitignored, so git will not recover them; revs 1 and 2 were lost
+exactly this way. Record rejected options with their reasons, or they get
+re-proposed later.
 
 Easy to break by accident:
 
