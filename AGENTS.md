@@ -26,9 +26,22 @@ Two styles ship, selected by `data-style` on `<html>`:
 **Design artifacts are versioned, never overwritten.** Before changing any design
 doc or preview, archive the current version under a new name and edit the copy —
 version docs as `design/vN-*.md`, previews as `design/previews/YYYY-MM-DD-*.html`.
-These files are gitignored, so git will not recover them; revs 1 and 2 were lost
-exactly this way. Record rejected options with their reasons, or they get
-re-proposed later.
+These files are gitignored, so *this* repo's history will not recover them; revs 1
+and 2 were lost exactly this way. Record rejected options with their reasons, or
+they get re-proposed later.
+
+**Back the private files up after changing them:**
+
+```bash
+./scripts/private-backup.sh "what changed"
+./scripts/private-backup.sh --status    # show what is tracked
+```
+
+They live in a second repo sharing this work tree (git dir `.private.git`,
+remote `Serkmi/spswebsite-private`, private). It covers `DESIGN.md`, `VOICE.md`,
+`design/`, the working notes, and the reference images. Adds are forced because
+the shared `.gitignore` hides those paths by design. Nothing from the public tree
+can enter it.
 
 Easy to break by accident:
 
