@@ -10,9 +10,19 @@ Personal site. Next.js App Router · TypeScript · Tailwind v4 · MDX · Vercel.
 
 ## Design system
 
-The full design system lives in `DESIGN.md`, which is **kept locally and not committed**
-(it quotes private working notes). The rules below are the load-bearing ones — they are
-what a contributor needs, and they are all observable in `app/globals.css` anyway.
+The full design system is versioned under `design/`, with `DESIGN.md` as the index.
+Both are **kept locally and not committed** (they quote private working notes). The
+rules below are the load-bearing ones — they are what a contributor needs, and they
+are all observable in `app/globals.css` anyway.
+
+Two styles ship, selected by `data-style` on `<html>`:
+
+- **`ledger`** — rev 3, The Annotated Ledger. **The default.** Flat grounds.
+- **`lacquer`** — rev 4, Lacquer & Brass. Dark ground rakes from `--blue-shadow` to
+  `--blue-deep` across the top 900px, then settles flat. Masked metal flake.
+
+`data-style` and the light/dark theme are **independent axes**. Never couple them.
+Never edit a frozen version doc — copy it to the next number.
 
 Easy to break by accident:
 
@@ -24,7 +34,13 @@ Easy to break by accident:
 - **`border-radius: 0`** everywhere except 2px on interactive chips and buttons.
 - **No gloss, bevel, drop-shadow, or gradient on any UI element.** The metallic reads
   only through the semantic blue ramp (`--blue-*`, anchored on `#0B2D4F`), the masthead
-  rake, and the dark-mode flake grain.
+  rake, the dark-mode flake grain, and — under `lacquer` only — the ground rake. Those
+  are the whole list. A gradient on a button or card is still forbidden.
+- **The lacquer crest is capped at `--blue-deep` `#0B2D4F`.** This is a contrast limit,
+  not a preference: over a brighter crest `--muted` measures 3.31:1 and `--link` 3.64:1
+  and both fail AA. Do not brighten it because it looks better.
+- **Flake is masked to the lit region.** Unmasked speckle on a dark blue ground reads
+  as a starfield rather than paint.
 - **Motion is minimal-functional.** The link underline sweep and the theme crossfade.
   Nothing else — no entrance animations, no scroll choreography.
 - Light mode is the default; dark is opt-in.

@@ -48,6 +48,65 @@
   --flake-opacity: 0.9;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   Style: lacquer (rev 4) — see design/v4-lacquer-brass.md
+   A style is a token block. data-style and light/dark are independent
+   axes; never couple them. Default is ledger, so omitting the attribute
+   reproduces rev 3 exactly.
+   ═══════════════════════════════════════════════════════════════ */
+
+[data-style="lacquer"] {
+  /* The crest is a CONTRAST CEILING, not a preference. Over anything
+     brighter, --muted measures 3.31:1 and --link 3.64:1 and both fail AA.
+     At --blue-deep every rev 3 token passes unchanged. Do not raise it. */
+  --lacquer-crest: var(--blue-deep);
+  --lacquer-rake-height: 900px;
+}
+
+[data-style="lacquer"].dark {
+  --flake-opacity: 0.62;
+}
+
+/* The ground rake. Confined to the top of the document, then flat: a
+   gradient stretched over a full page makes body-text contrast depend on
+   scroll position. There is deliberately no specular layer — even 0.05
+   alpha of light over the crest drops --muted to 4.28. The flake is the
+   highlight. */
+[data-style="lacquer"].dark body {
+  position: relative;
+  /* Pixel stops on a full-height gradient, NOT a sized background box. A
+     tilted gradient lands its final stop at a corner, so a 900px box does not
+     end on a uniform color and its bottom edge shows as a seam. Past the last
+     stop the color simply continues, so there is no edge to see. */
+  background:
+    linear-gradient(172deg,
+      var(--blue-shadow) 0px,
+      var(--lacquer-crest) 400px,
+      var(--blue-shadow) 700px,
+      var(--ground) var(--lacquer-rake-height));
+  background-color: var(--ground);
+}
+
+/* The flake, masked to the lit region. Unmasked speckle on a dark blue
+   ground reads as a starfield, not as paint — masking is what makes it
+   metal. Tinted --blue-flake rather than white so screen-blending can't
+   blow local luminance past the ceiling. */
+[data-style="lacquer"].dark body::before {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: var(--lacquer-rake-height);
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='k'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='1' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='gamma' exponent='7' amplitude='2.1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23k)' fill='%23A8D4F5'/%3E%3C/svg%3E");
+  /* Must fade to nothing well inside the element, or its bottom edge seams. */
+  -webkit-mask-image: radial-gradient(ellipse 64% 46% at 58% 20%,
+    #000 0%, rgba(0, 0, 0, 0.55) 40%, transparent 74%);
+  mask-image: radial-gradient(ellipse 64% 46% at 58% 20%,
+    #000 0%, rgba(0, 0, 0, 0.55) 40%, transparent 74%);
+}
+
+/* Light mode under lacquer is unchanged rev 3 paper — a lacquered light
+   mode is a contradiction. Nothing to declare. */
+
 @theme inline {
   --color-ground: var(--ground);
   --color-ground-sunk: var(--ground-sunk);

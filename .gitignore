@@ -4,6 +4,7 @@
 # Working notes, design reasoning, and voice guidance quote Sean's private
 # notes and personal reflections. They stay on disk, out of git.
 DESIGN.md
+design/
 VOICE.md
 *.odt
 .~lock.*#

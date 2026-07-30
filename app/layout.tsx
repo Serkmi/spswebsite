@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Newsreader, IBM_Plex_Mono } from "next/font/google";
 import { Header, Footer } from "@/components/Chrome";
 import { themeScript } from "@/components/ThemeToggle";
+import { styleScript } from "@/components/StyleToggle";
 import "./globals.css";
 
 const newsreader = Newsreader({
@@ -44,6 +45,7 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: styleScript }} />
       </head>
       <body>
         <div className="relative z-[1] mx-auto max-w-[80rem] px-6">

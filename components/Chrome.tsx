@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle";
+import { StyleToggle } from "./StyleToggle";
 
 const NAV = [
   { href: "/writing", label: "Writing" },
@@ -20,6 +21,7 @@ export function Header() {
             {n.label}
           </Link>
         ))}
+        <StyleToggle />
         <ThemeToggle />
       </nav>
     </header>
