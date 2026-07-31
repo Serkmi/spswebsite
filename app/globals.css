@@ -214,7 +214,7 @@ button:focus-visible {
 
 .rake {
   width: fit-content;
-  font-size: clamp(2.9rem, 8.5vw, 6rem);
+  font-size: clamp(2.4rem, 5.2vw, 3.5rem);
   line-height: 0.95;
   font-weight: 500;
   letter-spacing: -0.022em;

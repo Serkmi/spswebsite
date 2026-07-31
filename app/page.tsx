@@ -7,23 +7,18 @@ export default function Home() {
 
   return (
     <>
-      <header className="pb-16 pt-24">
-        <h1 className="rake m-0">
-          Sean P.
-          <br />
-          Stewart
-        </h1>
-        <p className="mt-6 max-w-[54ch] text-[1.08rem] leading-[1.55] text-muted">
+      <header className="border-b border-rule pb-10 pt-12">
+        <h1 className="rake m-0">Sean P. Stewart</h1>
+        <p className="mt-4 max-w-[54ch] text-[1.08rem] leading-[1.55] text-muted">
           Fifteen years inside seven banks, another five in and around dozens more plus
-          alternative lenders, learning exactly how they work and where they
-          don&rsquo;t.{" "}
+          alternative lenders, learning how they work and where they struggle.{" "}
           <span className="italic text-annot">
-            Now building the workflows I wish existed!
+            Now building custom process improvements at speed.
           </span>
         </p>
       </header>
 
-      <section className="mt-24">
+      <section className="mt-14">
         <SectionHead title="Recent" aside="All registers" />
         {recent.length > 0 ? (
           <>
