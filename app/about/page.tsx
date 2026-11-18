@@ -37,9 +37,9 @@ export default function About() {
         </p>
         <p>It&rsquo;s hard to quantify.</p>
         <p>
-          Sean originally founded CircumFi to help small business owners access low-cost
-          financing through a process that generated competition among lenders. CircumFi
-          is now focused on niche fintech business lending solutions.
+          Sean is the founder of <a href="https://circumfi.com">CircumFi</a>. CircumFi
+          provides proactive default management solutions and elevated borrower
+          experiences for small business lenders.
         </p>
         <p>
           Sean has also been a Founding Member of the Hudson Valley Venture Hub, a former
